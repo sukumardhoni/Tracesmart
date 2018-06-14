@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bgImage">
+
+  <div *ngIf="showScan">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" fixed>Enter Code Here</ion-label>
+        <ion-input [(ngModel)]="scannedCode"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-row>
+      <ion-col text-center>
+        <ion-badge item-end>OR</ion-badge>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button color="dark" block (click)="scan()">Scan</button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="showDistributor">
+    <ion-list>
+      <ion-item>
+        <ion-label>Distributer</ion-label>
+        <ion-select [(ngModel)]="item1" (ngModelChange)="selectedDistributer($event)">
+          <ion-option [value]="item" *ngFor="let item of DEALERSLISTGLOBAL">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="showCrop">
+    <ion-list>
+      <ion-item>
+        <ion-label>Crop</ion-label>
+        <ion-select [(ngModel)]="item2" (ngModelChange)="selectedCrop($event)">
+          <ion-option [value]="crop" *ngFor="let crop of CROPLIST">{{crop.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="showHybrid">
+    <ion-list>
+      <ion-item>
+        <ion-label>Hybrid</ion-label>
+        <ion-select [(ngModel)]="item3" (ngModelChange)="selectedVarient($event)">
+          <ion-option [value]="varients" *ngFor="let varients of varientsList">{{varients.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="showUser">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" fixed>Mobile No.</ion-label>
+        <ion-input type="tel" maxlength="10" clearInput (keyup)="getUserDetails($event)" [(ngModel)]="userMobile"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" fixed>User Details</ion-label>
+        <ion-input disabled="true" [(ngModel)]="userDetails"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="showQuantity">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" fixed>Quantity</ion-label>
+        <ion-input type="number" [(ngModel)]="orderNumber" text-right (ngModelChange)="selectedQuantity(orderNumber)" [disabled]="availableNumber <= 0"
+          max="{{availableNumber}}"></ion-input>
+        <ion-icon name="ios-arrow-down-outline" item-right></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="showAvailableQuantity">
+    <ion-list>
+      <ion-item text-right>
+        Available Quantity :
+        <ion-badge item-end>{{availableNumber}}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+
+
+
+
+
+
+</ion-content>
+
+<ion-footer>
+  <div *ngIf="Role == 2">
+    <button ion-button color="secondary"  block [disabled]="orderNumber == null || orderNumber <= 0 || orderNumber > availableNumber"
+      (click)="confirmOrder()">Confirm Order</button>
+  </div>
+
+  <div *ngIf="Role == 3 && mode == 1">
+    <ion-row>
+      <ion-col>
+        <button ion-button color="secondary"  (click)="confirmSale()" [disabled]="scannedCode == ''">Confirm Sale</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="secondary"  (click)="confirmReturn()" [disabled]="scannedCode == ''">Returns</button>
+      </ion-col>
+    </ion-row>
+
+
+  </div>
+  <div *ngIf="Role == 3 && mode == 2">
+    <button ion-button color="secondary" block  (click)="requestStock()" [disabled]="orderNumber == null || orderNumber <= 0 || orderNumber > availableNumber">Request Stock</button>
+  </div>
+  <div *ngIf="Role == 3 && mode == 3">
+    <button ion-button color="secondary" block  (click)="confirmTransfer()" [disabled]="orderNumber == null || orderNumber <= 0 || orderNumber > availableNumber">Confirm Transfer</button>
+  </div>
+
+</ion-footer>

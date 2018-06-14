@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bgImage">
+  
+  <div *ngIf="userProfile?.roleID == 1 || userProfile?.roleID == 2">
+    <ion-row>
+      <ion-col class="reportGrid" col-1>
+        Id
+      </ion-col>
+      <ion-col class="reportGrid" col-3>
+        Dealer
+      </ion-col>
+      <ion-col class="reportGrid" col-3>
+        Details
+      </ion-col>
+      <ion-col class="reportGrid" col-3>
+        Date
+      </ion-col>
+      <ion-col class="reportGrid" col-2>
+        No
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="table-bg" *ngFor="let item of transList" (click)="showDetails(item)">
+      <ion-col class="reportGridCol" col-1>
+        {{item.orderID}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-3>
+        {{item.distributorName}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-3>
+        {{item.productCategoryName}} {{item.productName}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-3>
+        {{item.createdAt | date:'short'}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-2>
+        {{item.quantity}}
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+  <!-- <div *ngIf="userProfile?.roleID == 2">
+    <ion-row>
+      <ion-col class="reportGrid" col-1>
+        Id
+      </ion-col>
+      <ion-col class="reportGrid" col-3>
+        Dealer
+      </ion-col>
+      <ion-col class="reportGrid" col-3>
+        Details
+      </ion-col>
+      <ion-col class="reportGrid" col-3>
+        Date
+      </ion-col>
+      <ion-col class="reportGrid" col-2>
+        No
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="table-bg" *ngFor="let item of transList" (click)="showDetails(item)">
+      <ion-col class="reportGridCol" col-1>
+        {{item.orderID}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-3>
+        {{item.distributorName}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-3>
+        {{item.productCategoryName}} {{item.productName}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-3>
+        {{item.createdAt | date:'short'}}
+      </ion-col>
+      <ion-col class="reportGridCol" col-2>
+        {{item.quantity}}
+      </ion-col>
+    </ion-row>
+  </div> -->
+
+
+  <div *ngIf="userProfile?.roleID == 3">
+    <ion-row>
+      <ion-col class="reportGrid">
+        Product Id
+      </ion-col>
+      <ion-col class="reportGrid">
+        Product Name
+      </ion-col>
+      <ion-col class="reportGrid">
+        Quantity
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="table-bg" *ngFor="let item of transList" (click)="showDetails(item)">
+      <ion-col class="reportGridCol">
+        {{item.productID}}
+      </ion-col>
+      <ion-col class="reportGridCol">
+        {{item.productCode}}
+      </ion-col>
+      <ion-col class="reportGridCol">
+        {{item.quantity}}
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-row *ngIf="transList?.length == 0">
+      <ion-col text-center>
+          No Transactions Yet
+      </ion-col>
+  </ion-row>
+
+</ion-content>

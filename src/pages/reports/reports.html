@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>reports</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bgImage">
+
+
+  <div *ngIf="userProfile?.roleID == 3">
+    <ion-row>
+      <ion-col class="reportGrid">
+        Product
+      </ion-col>
+      <ion-col class="reportGrid">
+        Product Code
+      </ion-col>
+      <ion-col class="reportGrid">
+        Quantity
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="table-bg" *ngFor="let item of reportList">
+      <ion-col class="reportGridCol">
+        {{item.productCategoryName}}
+      </ion-col>
+      <ion-col class="reportGridCol">
+        {{item.productName}}
+      </ion-col>
+      <ion-col class="reportGridCol">
+        {{item.quantity}}
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="userProfile?.roleID == 2 || userProfile?.roleID == 1">
+    <ion-row>
+      <ion-col class="reportGrid">
+        Dispatch Center
+      </ion-col>
+      <ion-col class="reportGrid">
+        Product Name
+      </ion-col>
+      <ion-col class="reportGrid">
+        Quantity
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="table-bg" *ngFor="let item of reportList">
+      <ion-col class="reportGridCol">
+        {{item.dispatchCenterName}}
+      </ion-col>
+      <ion-col class="reportGridCol">
+        {{item.productName}}
+      </ion-col>
+      <ion-col class="reportGridCol">
+        {{item.quantity}}
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+</ion-content>

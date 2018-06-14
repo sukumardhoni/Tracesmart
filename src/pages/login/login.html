@@ -1,0 +1,25 @@
+<ion-content padding class="bgImage">
+  <br>
+  <br>
+  <h3 class='textAlignCenter'>
+    <img src='assets/imgs/logo.png'>
+  </h3>
+  <br>
+  <br>
+  <form [formGroup]="users" (ngSubmit)="doLogin()">
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input  formControlName="userName" type="text" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input  formControlName="passWord" type="password" ></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button color="dark" block [disabled]="!users.valid">Sign In</button>
+</form>
+
+  
+</ion-content>

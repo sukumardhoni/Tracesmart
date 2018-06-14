@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -7,12 +7,56 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content padding class="bgImage">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-row style="background: white;">
+    <div class="tsPadding" *ngIf="Role == 1 || Role == 2 || Role == 3">
+      Available Stock
+    </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <div class="tsPadding" *ngIf="Role == 4">
+      My Orders
+    </div>
+    <!-- {{pieChartLabels}}
+
+    <br>
+    <br> {{pieChartData}} -->
+
+    <div *ngIf="pieChartLabels">
+      <div style="display: block;height: 190px;width: 350px;">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+    </div>
+
+    <div *ngIf="Role == 1">
+      <div class="tsPadding">
+        Stock VS Sale
+      </div>
+      <div style="display: block;">
+        <canvas baseChart width="381" height="250" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      <div class="tsPadding">
+        Recieved Bills
+      </div>
+
+      <div style="display: block;height: 190px;width: 335px !important;">
+          <canvas baseChart 
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+
+
+    </div>
+
+  </ion-row>
 </ion-content>

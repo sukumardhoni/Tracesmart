@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  class="bgImage">
+     
+    <img class="profilePageImage" src="assets/imgs/default_user.jpg" />
+    <div class="menuProfileName textAlignCenter paddingTop">{{userProfile.firstName}} </div>
+    <p class='menuProfileDesig textAlignCenter'>{{userProfile?.roleName}} {{userProfile.distributorName}}</p>
+    <!-- <p class='menuProfileDesig textAlignCenter'>{{userProfile.roleName}}</p> -->
+    
+      <ion-item>
+        Name
+        <ion-badge item-end>{{userProfile.firstName}} {{userProfile.middleName}} {{userProfile.lastName}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        Mobile
+        <ion-badge item-end>88388 88388</ion-badge>
+      </ion-item>
+      <ion-item>
+        Address
+        <ion-badge item-end>1406, Babukhan Estate, Bashirbagh</ion-badge>
+      </ion-item>
+      <ion-item>
+        City
+        <ion-badge item-end>{{userProfile.regionName}},{{userProfile.state}}</ion-badge>
+      </ion-item>
+
+      <ion-item>
+          State
+          <ion-badge item-end>{{userProfile.state}}</ion-badge>
+        </ion-item>
+
+      <ion-item>
+        Country
+        <ion-badge item-end>{{userProfile.country}}</ion-badge>
+      </ion-item>
+    
+ 
+</ion-content>
